@@ -1,0 +1,88 @@
+Analysis of HW_resize2D on different Images
+
+1. Magnification of eye50.bw
+	a)Scale Factor 2:
+	When scaling the image by a factor of 2, all the kernels seem to yield similar and acceptable results.
+	Most of the details are still visibile and there are no artificats / blockiness visible.
+	
+	b)Scale Factor 4:
+	When scaling the image by a factor of 4, the overall visual aesthetic worsens for most filters.
+	
+	Box Filter: provides the worse result as there begins to be visual pixel blocks most noticable
+	along the eyeball and upper eye lid.
+	
+	Triangle Filter: maintains the contours and shape of the eye charactistics
+	but the color and distinction between the upper eye lid/ pupil, and lower eye lid worsens. 
+	
+	Cubic Convolution: does not maintain the contours and shape of the eye characteristics as much as the triangle filter.
+	However it maintains and emphasizes the darker pixels and lighter pixels better than the triangle filter.
+
+	Lanczos: Similar to Triangle Filter
+	Hann: Similar to Triangle Filter
+	Hamming: Similar to Triangle Filter
+		
+	c)Scale Factor 10: 
+	Scaling the image by a factor of 10 for any kernel is not acceptable. The output image is blurry and
+	much of the detail from the original image seems to be lost.
+
+	Box Filter: provides the worse result because it is too pixelized.
+	The transition between pixels along the pupil of the eye and the eyeball is not smooth enough compared to the other filters.
+	
+	Triangle Filter: maintains the contours and shape of the eye charactistics
+	but the color and distinction between the upper eye lid/ pupil, and lower eye lid is lost. 
+	
+	Cubic Convolution: does not maintain the contours and shape of the eye characteristics as much as the triangle filter.
+	However it maintains and emphasizes the darker pixels and lighter pixels better than the triangle filter.
+
+	Lanczos: Similar to Triangle Filter
+	Hann: Similar to Triangle Filter:
+	Hamming: Similar to Triangle Filter
+	
+
+2. Magnification of text50.bw
+	a)Scale Factor 2:
+	When scaling the image by a factor of 2, all the kernels seem to yield similar and acceptable results.
+	Most of the details are still visibile and there are no artificats / blockiness visible. The text is
+	readable and mostly clear for all filters.
+	
+	b)Scale Factor 4:
+	When scaling the image by a factor of 4:
+	Box filter: yields the worse result because it has unsmooth transitions along the edges of the text. Curves no longer transition smoothly. 
+	Triangle filter: acceptable result. Shape and curves for each letter is maintain but color/ darkness of the text is dulled.	
+	Cubic Convolution: acceptable result. Much like triangle filter but does a better job at keeping the darkness of the text intact.
+	
+	Lanczos: Similar to Triangle Filter.
+	Hann: Similar to Triangle Filter.
+	Hamming: Similar to Triangle Filter.
+
+	c)Scale Factor 10: 
+	Scaling the image by a factor of 10:
+	Box Filter: Not acceptable for box filter for the same reasons as in the Factor 4.
+	
+	Triangle Filter:Aacceptable as the text is still readable. It is very noticable that the
+	edges of the letters seem to be blurry and gray.
+
+	Cubic Convolution: Acceptable, color and contours are still maintained and does not really worsen too much.
+ 	Lanczos: Similar to Cubic Convolution Filter but text is not as dark.
+	Hann: Similar to Cubic Convolution Filter but text is not as dark.
+	Hamming: Similar to Cubic Convolution Filter but text is not as dark.
+
+3. Minification 
+	Star.bw
+	a) Compare Point Sampling and Other filter types:
+	Using the Point Sampling method: There are artifacts that show up near the center of the image.
+	On each side of the center (N,W,E,S) there exist a contour curve. This curve does not show up for higher quality filters.
+
+	Ramp.bw
+	a) Compare Point Sampling and Other filter types:
+	The result for using point sampling and other filter types are visually the same. 
+
+	It seems like point sampling works well for ramp.bw but not for star.bw. 
+	This has to do with the fact that ramp.bw is smooth image with one gradient going from left to right. 
+	That is, for any pixel, the neighboring pixel grayscale color is largely the same. 
+	This makes it easy for the box filter to calculate a unknown pixel between two pixels that have very close grayscale values.
+	However, star.bw is largely mad up of contours and lines. The overall image includes various combinations of black and white pixels
+	neighboring each other. This makes it harder for the box filter to estimate values especially for pixels that should lie inbetween
+	the edges or areas that sharply move from black to white. 
+
+	
